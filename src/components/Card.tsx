@@ -1,5 +1,7 @@
 import { Share2, Trash2 } from "lucide-react";
 import Tag from "./Tag";
+import TwitterIcon from "../assets/icons/TwitterIcon";
+import YoutubeIcon from "../assets/icons/YoutubeIcon";
 
 interface CardProps {
   title: string;
@@ -12,15 +14,8 @@ const Card = ({ title, link, type }: CardProps) => {
     <div className="bg-white w-2xs rounded-2xl h-80 border-2 border-primary overflow-hidden p-2">
       {/* Topbar */}
       <div className="opacity-60 flex justify-evenly shadow-amber-950">
-        <svg
-          role="img"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-3"
-        >
-          <title>X</title>
-          <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
-        </svg>
+        {type === "twitter" && (<TwitterIcon />)}
+        {type === "youtube" && (<YoutubeIcon />)}
 
         <div>{title}</div>
 

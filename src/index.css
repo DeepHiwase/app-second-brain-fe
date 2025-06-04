@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -5,4 +6,5 @@
   --color-secondary: #FED9ED;
   --color-border: #648DB3;
   --color-bg: #B2D8CE;
+  --font-bagel-fat-one: "Bagel Fat One", system-ui;
 }

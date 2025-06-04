@@ -26,8 +26,8 @@ const Signup = () => {
   return (
     <div className="h-screen w-screen flex justify-center items-center bg-slate-400">
       <div className="w-72 bg-white rounded border p-8">
-        <Input ref={usernameRef} placeholder="username" onChange={() => {}} />
-        <Input ref={passwordRef} placeholder="password" onChange={() => {}} />
+        <Input ref={usernameRef} placeholder="username" />
+        <Input ref={passwordRef} placeholder="password" />
         <div className="flex justify-center p-4">
           <Button
             variant="primary"

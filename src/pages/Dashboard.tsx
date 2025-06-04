@@ -2,13 +2,23 @@ import { Plus, Share2 } from "lucide-react";
 import Button from "../components/ui/Button";
 import Card from "../components/Card";
 import AddContentModal from "../components/AddContentModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { useContent } from "../hooks/useContent";
+import { useNavigate } from "react-router";
 
 const Dashboard = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const contents = useContent();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/signin");
+    }
+  }, []);
 
   return (
     <div className="bg-purple-50 h-screen">
