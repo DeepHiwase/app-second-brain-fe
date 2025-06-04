@@ -1,7 +1,14 @@
 import { X } from "lucide-react";
 import Button from "./ui/Button";
-import { useRef, type Ref } from "react";
+import { useRef, useState, type Ref } from "react";
 import { useOnClickOutside } from "usehooks-ts";
+import { BACKEND_URI } from "../utils/config";
+import axios from "axios";
+
+enum ContentType {
+  Youtube = "youtube",
+  Twitter = "twitter",
+}
 
 const AddContentModal = ({
   open,
@@ -11,6 +18,9 @@ const AddContentModal = ({
   onClose: () => void;
 }) => {
   const ref = useRef(null);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const linkRef = useRef<HTMLInputElement>(null);
+  const [contentType, setContentType] = useState(ContentType.Youtube);
 
   const handleClickOutside = () => {
     onClose();
@@ -18,6 +28,25 @@ const AddContentModal = ({
 
   // @ts-expect-error ref related error to solve
   useOnClickOutside(ref, handleClickOutside);
+
+  const addContent = async () => {
+    const title = titleRef.current?.value;
+    const link = linkRef.current?.value;
+
+    await axios.post(
+      BACKEND_URI + "/api/v1/content",
+      {
+        title,
+        link,
+        type: contentType,
+      },
+      {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      }
+    );
+  };
 
   return (
     <div>
@@ -31,15 +60,38 @@ const AddContentModal = ({
             <div onClick={onClose}>
               <X className="absolute right-0 top-0 cursor-pointer" />
             </div>
-
-            <Input placeholder="Link" />
-            <Input placeholder="Title" />
-
+            <Input ref={linkRef} placeholder="Link" />
+            <Input ref={titleRef} placeholder="Title" />
+            Type
+            <div className="flex gap-1 justify-center">
+              <Button
+                text="Twitter"
+                onClick={() => {
+                  setContentType(ContentType.Twitter);
+                }}
+                size="md"
+                variant={
+                  contentType === ContentType.Twitter ? "primary" : "secondary"
+                }
+              />
+              <Button
+                text="Youtube"
+                onClick={() => {
+                  setContentType(ContentType.Youtube);
+                }}
+                size="md"
+                variant={
+                  contentType === ContentType.Youtube ? "primary" : "secondary"
+                }
+              />
+            </div>
             <Button
               variant="primary"
               text="Submit"
               size="md"
-              onClick={() => {}}
+              onClick={() => {
+                addContent();
+              }}
             />
           </div>
         </div>
@@ -52,11 +104,11 @@ export default AddContentModal;
 
 export const Input = ({
   placeholder,
-  onChange,
+  // onChange,
   ref,
 }: {
   placeholder: string;
-  onChange: () => void;
+  // onChange: () => void;
   ref?: Ref<HTMLInputElement>;
 }) => {
   return (
@@ -65,7 +117,7 @@ export const Input = ({
       type="text"
       className="px-4 py-2 border-2"
       placeholder={placeholder}
-      onChange={onChange}
+      // onChange={onChange}
     />
   );
 };
