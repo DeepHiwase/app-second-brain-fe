@@ -54,11 +54,11 @@ const AddContentModal = ({
         <div className="h-screen w-screen bg-slate-500 fixed top-0 left-0 opacity-60 flex items-center justify-center">
           <div
             ref={ref}
-            className="bg-white w-70 h-90 rounded-sm relative opacity-100 flex justify-center items-center flex-col gap-2
+            className="bg-white w-70 h-90 rounded-2xl relative flex justify-center items-center flex-col gap-2
           "
           >
             <div onClick={onClose}>
-              <X className="absolute right-0 top-0 cursor-pointer" />
+              <X className="absolute right-2 top-2 cursor-pointer" />
             </div>
             <Input ref={linkRef} placeholder="Link" />
             <Input ref={titleRef} placeholder="Title" />

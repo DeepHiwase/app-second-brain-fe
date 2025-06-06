@@ -21,38 +21,44 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="bg-purple-50 h-screen">
+    <div className="bg-purple-50 h-screen p-5">
       <Sidebar />
-      <div className="ml-77">
-        <Button
-          variant="primary"
-          size="md"
-          text="Add Content"
-          onClick={() => {
-            setModalOpen(true);
-          }}
-          startIcon={<Plus />}
-        />
-        <Button
-          variant="secondary"
-          size="md"
-          text="Share Brain"
-          onClick={() => {}}
-          startIcon={<Share2 />}
-        />
+      <div className="ml-65">
+        <div className="flex gap-2 justify-between">
+          <div className="text-2xl font-bold text-primary">All Content</div>
+          <div className="flex gap-2">
+            <Button
+              variant="primary"
+              size="md"
+              text="Add Content"
+              onClick={() => {
+                setModalOpen(true);
+              }}
+              startIcon={<Plus width={20} />}
+            />
+            <Button
+              variant="secondary"
+              size="md"
+              text="Share Brain"
+              onClick={() => {}}
+              startIcon={<Share2 width={20} />}
+            />
+          </div>
+        </div>
 
+        
+
+        <div className="flex flex-wrap gap-3 pt-3">
+          {contents.map(({ title, link, type }) => (
+            <Card key={link} title={title} link={link} type={type} />
+          ))}
+        </div>
         <AddContentModal
           open={modalOpen}
           onClose={() => {
             setModalOpen(false);
           }}
         />
-
-        <div className="flex flex-wrap gap-2">
-          {contents.map(({ title, link, type }) => (
-            <Card title={title} link={link} type={type} />
-          ))}
-        </div>
       </div>
     </div>
   );

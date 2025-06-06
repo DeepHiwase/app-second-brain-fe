@@ -8,3 +8,7 @@
   --color-bg: #B2D8CE;
   --font-bagel-fat-one: "Bagel Fat One", system-ui;
 }
+
+body {
+  box-sizing: border-box;
+}

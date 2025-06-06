@@ -11,24 +11,30 @@ interface CardProps {
 
 const Card = ({ title, link, type }: CardProps) => {
   return (
-    <div className="bg-white w-2xs rounded-2xl h-80 border-2 border-primary overflow-hidden p-2">
+    <div className="bg-white w-2xs rounded-2xl h-80 border-2 border-primary overflow-hidden p-3">
       {/* Topbar */}
-      <div className="opacity-60 flex justify-evenly shadow-amber-950">
-        {type === "twitter" && (<TwitterIcon />)}
-        {type === "youtube" && (<YoutubeIcon />)}
+      <div className="opacity-60 flex justify-between shadow-amber-950 items-center px-2">
+        <div className="flex gap-2 items-center">
+          <div>
+            {type === "twitter" && <TwitterIcon />}
+            {type === "youtube" && <YoutubeIcon />}
+          </div>
 
-        <div>{title}</div>
-
-        <div>
-          <a href={link} target="_blank">
-            <Share2 />
-          </a>
+          <div>{title}</div>
         </div>
-        <Trash2 />
+
+        <div className="flex gap-2 items-center">
+          <div>
+            <a href={link} target="_blank">
+              <Share2 width={20} />
+            </a>
+          </div>
+          <Trash2 width={20} />
+        </div>
       </div>
 
       {/* Thumbnail or Details wrapped */}
-      <div className="my-2 overflow-scroll h-[56%]">
+      <div className="my-2 overflow-scroll overflow-x-hidden min-h-[56%] max-h-[70%]">
         {type === "youtube" && (
           <iframe
             width={260}
@@ -47,14 +53,16 @@ const Card = ({ title, link, type }: CardProps) => {
         )}
       </div>
 
-      {/* tags */}
-      <div className="flex">
-        <Tag name="productivity" />
-        <Tag name="learning" />
-      </div>
+      <div>
+        {/* tags */}
+        <div className="flex gap-1">
+          <Tag name="productivity" />
+          <Tag name="learning" />
+        </div>
 
-      {/* date of creation of card */}
-      <div className="text-gray-300 text-[12px]">Added on 10/03/2024</div>
+        {/* date of creation of card */}
+        <div className="text-gray-400/70 text-[12px]">Added on 10/03/2024</div>
+      </div>
     </div>
   );
 };

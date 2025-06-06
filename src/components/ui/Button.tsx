@@ -14,7 +14,7 @@ export interface ButtonProps {
 
 const ButtonVariants = {
   primary: "bg-primary text-white",
-  secondary: "bg-secondary text-white",
+  secondary: "bg-secondary text-primary",
 };
 
 const sizeStyles = {
@@ -38,7 +38,7 @@ const Button = ({
       className={cn(
         ButtonVariants[variant],
         sizeStyles[size],
-        "rounded-2xl flex pr-2.5 cursor-pointer",
+        "rounded-2xl flex pr-3 cursor-pointer items-center gap-1 hover:opacity-55 transition-all delay-75",
         `${fullWidth ? "w-full flex justify-center" : null}`
       )}
       onClick={onClick}
